@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Relation Between Street-Sign Work Orders with NYCT Collision Data</title>
+    <link rel="stylesheet" href="style/index.css">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+<body>
+    <p>
+        This seeks to combine two separate data bases,
+        <br>Sign Work Orders: https://data.cityofnewyork.us/Transportation/Street-Sign-Work-Orders/qt6m-xctn
+        Motor Vehicle Collisions: https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95
+    </p>
+
+    <label for="graphs">Graph Type:</label>
+    <select name="graphs" id="graphs" onchange="unhide(value)">
+        <option value="barGraph">Bar Graph</option>
+        <option value="pieChart">Pie Chart</option>
+        <option value="scatterplot">Scatterplot</option>
+    </select>
+    <script>
+function unhide(element)
+{
+if(element =='barGraph'){
+	document.getElementById('pieChart').style.display='none';
+   document.getElementById(element).style.display = 'block';
+   document.getElementById('scatterPlot').style.display='none';
+   }
+else if(element == 'pieChart'){
+   document.getElementById('pieChart').style.display='block';
+   document.getElementById('barGraph').style.display = 'none';
+   document.getElementById('scatterPlot').style.display='none';
+   }
+else if(element == 'scatterplot'){
+   document.getElementById('pieChart').style.display='none';
+   document.getElementById('barGraph').style.display = 'none';
+   document.getElementById('scatterPlot').style.display='block';
+   }
+}
+    </script>
+    <!--BAR-->
+    <div id="barGraph" style="display:none;">
+        <br>
+        <label for="barGraphX">Bar Graph X-Axis:</label>
+        <select name="barGraphX" id="barGraphX">
+            <option value="contributingFactorsV1">Contributing Factors V1</option>
+            <option value="contributingFactorsV2">Contributing Factors V2</option>
+            <option value="signCode">Sign Code</option>
+            <option value="borough">Borough</option>
+            <option value="orderType">Order Type</option>
+        </select>
+    </div>
+    <!--PIE-->
+    <div id="pieChart" style="display:none;">
+        <br>
+        <label for="pieChartX">Pie Chart</label>
+        <select name="pieChartVals" id="pieChartVals">
+            <option value="contributingFactorsV1">Contributing Factors V1</option>
+            <option value="contributingFactorsV2">Contributing Factors V2</option>
+            <option value="signCode">Sign Code</option>
+            <option value="borough">Borough</option>
+            <option value="orderType">Order Type</option>
+        </select>
+    </div>
+    <!--SCATTER-->
+    <div id="scatterPlot" style="display:none;">
+        <br>
+        <label for="scatterPlotValsx">Scatter Plot X-axis</label>
+        <select name="scatterPlotV" id="scatterPlotVx">
+            <option value="contributingFactorsV1">Contributing Factors V1</option>
+            <option value="contributingFactorsV2">Contributing Factors V2</option>
+            <option value="signCode">Sign Code</option>
+            <option value="borough">Borough</option>
+            <option value="orderType">Order Type</option>
+            <option value="contributingFactorsV1">Contributing Factors V1 count</option>
+            <option value="contributingFactorsV2">Contributing Factors V2 count</option>
+            <option value="signCode">Sign Code count</option>
+            <option value="borough">Borough count</option>
+            <option value="orderType">Order Type count</option>
+        </select>
+        <label for="scatterPlotValsy">Scatter Plot Y-axis</label>
+        <select name="scatterPlotV" id="scatterPlotVy">
+            <option value="contributingFactorsV1">Contributing Factors V1</option>
+            <option value="contributingFactorsV2">Contributing Factors V2</option>
+            <option value="signCode">Sign Code</option>
+            <option value="borough">Borough</option>
+            <option value="orderType">Order Type</option>
+            <option value="contributingFactorsV1">Contributing Factors V1 count</option>
+            <option value="contributingFactorsV2">Contributing Factors V2 count</option>
+            <option value="signCode">Sign Code count</option>
+            <option value="borough">Borough count</option>
+            <option value="orderType">Order Type count</option>
+        </select>
+        <button type="button">Generate</button>
+        <button type="button" onclick="swap(); generate();">Swap X and Y</button>
+        <script>
+function swap()
+{
+var temp = document.getElementById("scatterPlotVy").value;
+document.getElementById("scatterPlotVy").value=document.getElementById("scatterPlotVx").value;
+document.getElementById("scatterPlotVx").value=temp;
+}
+        </script>
+
+    </div>
+    <!--CODING-->
+
+</body>
+</html>
